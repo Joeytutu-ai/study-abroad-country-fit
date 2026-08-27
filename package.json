@@ -1,8 +1,8 @@
 {
-  "name": "study-abroad-destination-shortlist",
+  "name": "study-abroad-country-fit",
   "version": "1.0.0",
   "private": true,
-  "description": "Validation tooling for the Study Abroad Destination Shortlist agent skill.",
+  "description": "Validation tooling for the Study Abroad Country Fit agent skill.",
   "scripts": {
     "validate": "node scripts/validate-skill.mjs",
     "test": "node scripts/validate-skill.mjs"

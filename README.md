@@ -1,4 +1,4 @@
-# Study Abroad Destination Shortlist
+# Study Abroad Country Fit
 
 [中文](#中文) | [English](#english)
 
@@ -41,11 +41,11 @@ An agent skill that narrows 13 study destinations to the 3 worth pursuing for a 
 
 ### 安装到任意兼容Agent
 
-克隆或下载本仓库后，将整个`study-abroad-destination-shortlist`目录复制到目标Agent的skill目录。不要只复制`SKILL.md`，因为`references/`、`examples/`和`scripts/`是完整资产的一部分。
+克隆或下载本仓库后，将整个`study-abroad-country-fit`目录复制到目标Agent的skill目录。不要只复制`SKILL.md`，因为`references/`、`examples/`和`scripts/`是完整资产的一部分。
 
 ```bash
-git clone https://github.com/<your-account>/study-abroad-destination-shortlist.git
-cp -R study-abroad-destination-shortlist <your-agent-skills-root>/
+git clone https://github.com/Joeytutu-ai/study-abroad-country-fit.git
+cp -R study-abroad-country-fit <your-agent-skills-root>/
 ```
 
 例如，Codex通常使用`~/.codex/skills/`；其他Agent请使用其文档指定的skill目录。安装后按该Agent的刷新方式重新加载skills。
@@ -55,7 +55,7 @@ cp -R study-abroad-destination-shortlist <your-agent-skills-root>/
 将下列请求交给已安装该skill的Agent：
 
 ```text
-请根据我的情况，使用study-abroad-destination-shortlist，为我匹配留学目的地Top3。
+请根据我的情况，使用study-abroad-country-fit，为我匹配最适合的留学国家/地区Top3。
 ```
 
 它会逐项补齐会改变排序的信息，并返回每个目的地的：匹配原因、关键得分维度、主要取舍、排名敏感项、来源链接和置信度。
@@ -108,8 +108,8 @@ The weights move when an applicant's stated priorities call for it. The skill th
 Clone or download the repository, then copy the entire folder—not only `SKILL.md`—to the agent's skill directory.
 
 ```bash
-git clone https://github.com/<your-account>/study-abroad-destination-shortlist.git
-cp -R study-abroad-destination-shortlist <your-agent-skills-root>/
+git clone https://github.com/Joeytutu-ai/study-abroad-country-fit.git
+cp -R study-abroad-country-fit <your-agent-skills-root>/
 ```
 
 For Codex, that directory is commonly `~/.codex/skills/`. For another agent, follow that agent's skill-installation documentation and reload its skills after copying.
@@ -117,7 +117,7 @@ For Codex, that directory is commonly `~/.codex/skills/`. For another agent, fol
 ### Use
 
 ```text
-Use study-abroad-destination-shortlist to match the Top3 study-abroad destinations for my profile.
+Use study-abroad-country-fit to match the Top3 study-abroad countries or regions for my profile.
 ```
 
 The result includes rationale, pivotal scoring dimensions, trade-offs, ranking sensitivities, dated source links, and confidence for each shortlisted destination.

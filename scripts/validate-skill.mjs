@@ -34,7 +34,7 @@ const frontmatter = skill.match(/^---\n([\s\S]*?)\n---\n/);
 if (!frontmatter) {
   failures.push('SKILL.md must start with YAML frontmatter.');
 } else {
-  requireText(frontmatter[1], 'name: study-abroad-destination-shortlist', 'skill name');
+  requireText(frontmatter[1], 'name: study-abroad-country-fit', 'skill name');
   requireText(frontmatter[1], 'description:', 'skill description');
 }
 

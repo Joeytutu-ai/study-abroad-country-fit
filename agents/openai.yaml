@@ -1,4 +1,4 @@
 interface:
-  display_name: "留学目的地初筛"
-  short_description: "根据学历路径、预算区间、语言准备与偏好，输出留学目的地Top3。"
-  default_prompt: "请用$study-abroad-destination-shortlist，根据我的学历目标、预算区间、语言和偏好，给出优先了解的留学目的地Top3。"
+  display_name: "留学国家匹配"
+  short_description: "根据学历路径、全学制预算、语言、职业目标与生活需求，输出最适合的国家/地区Top3。"
+  default_prompt: "请用$study-abroad-country-fit，根据我的学历目标、全学制预算、语言、职业目标和偏好，匹配最适合的留学国家/地区Top3。"

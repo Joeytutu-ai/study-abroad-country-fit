@@ -6,9 +6,9 @@
 >
 > 先选适合自己的留学国家，再进入院校和专业选择。
 
-`study-abroad-country-fit` is an open-source [Codex skill](https://developers.openai.com/codex/skills/) that interviews a degree-seeking applicant, removes destinations that conflict with their non-negotiables, and returns an explainable country-level Top3.
+`study-abroad-country-fit` is an open-source agent skill for AI agents and skill runtimes that can load a local `SKILL.md` file. It interviews a degree-seeking applicant, removes destinations that conflict with their non-negotiables, and returns an explainable country-level Top3.
 
-`study-abroad-country-fit`是一个开源Codex skill。它会通过逐题访谈建立申请人画像，先排除与硬条件冲突的目的地，再给出可解释的国家Top3。
+`study-abroad-country-fit`是一个面向AI Agent与skill运行环境的开源skill。只要环境支持加载本地`SKILL.md`文件，就可以接入。它会通过逐题访谈建立申请人画像，先排除与硬条件冲突的目的地，再给出可解释的国家Top3。
 
 ## What it covers / 覆盖范围
 
@@ -62,49 +62,59 @@ It also lists only the destinations that are currently blocked by a relevant har
 5. **Verify current facts / 核验时效信息** — checks official sources in the current session for material, changeable facts such as visas, work permissions, costs, scholarships, and post-study pathways.
 6. **Return an explainable Top3 / 输出可解释Top3** — never fills the list with unsuitable countries just to reach three results.
 
-## Install in Codex / 在Codex中安装
+## Install in your agent / 在你的Agent中安装
 
 ### Option A: Download ZIP / 下载ZIP
 
 1. On GitHub, choose **Code → Download ZIP** and unzip the repository.
-2. Copy the unzipped folder into your local Codex skills directory, using this exact destination name:
+2. Import the unzipped folder as a local skill in your agent, or copy the entire folder into that agent's local skills directory.
+3. Refresh the agent's skill list or start a new session if the skill is not shown immediately.
 
-   ```text
-   ~/.codex/skills/study-abroad-country-fit
-   ```
+Keep the folder structure intact. In the installed copy, `SKILL.md` must remain at the folder root and the `agents/`, `assets/`, and `references/` folders must stay alongside it.
 
-3. Start a new Codex task or restart Codex if the skill is not shown immediately.
+请保留完整目录结构。安装后的skill目录根部必须有`SKILL.md`，且`agents/`、`assets/`与`references/`目录不能丢失或单独移动。
 
 ### Option B: Clone with Git / 使用Git克隆
 
 ```bash
 git clone https://github.com/Joeytutu-ai/study-abroad-country-fit.git
+```
+
+Then import the cloned `study-abroad-country-fit` folder through your agent's local-skill workflow.
+
+> The repository root is the skill folder itself. After installation, `SKILL.md` should be located at `<your-agent-skill-directory>/study-abroad-country-fit/SKILL.md`.
+>
+> 本仓库根目录就是skill目录。安装后应确认`SKILL.md`位于`<你的Agent的skill目录>/study-abroad-country-fit/SKILL.md`。
+
+### Example: Codex / 示例：Codex
+
+Codex users can install it with:
+
+```bash
 mkdir -p ~/.codex/skills
 cp -R study-abroad-country-fit ~/.codex/skills/study-abroad-country-fit
 ```
 
-Then start a new Codex task.
+Other agents use different local-skill directories and import commands. Follow the documentation of the agent you use; the portable unit is the complete `study-abroad-country-fit` folder.
 
-> The repository root is the skill folder itself. After installation, `SKILL.md` should be located at `~/.codex/skills/study-abroad-country-fit/SKILL.md`.
->
-> 本仓库根目录就是skill目录。安装后应确认`SKILL.md`位于`~/.codex/skills/study-abroad-country-fit/SKILL.md`。
+不同Agent的本地skill目录和导入命令并不相同，请以所用Agent的文档为准；可移植的最小单位是完整的`study-abroad-country-fit`文件夹。
 
 ## Use it / 使用方法
 
-Call the skill in Codex, then describe the applicant's situation. You do not need to prepare every detail before starting; the skill asks one question at a time.
+After your agent has loaded the skill, ask it to use `study-abroad-country-fit` and describe the applicant's situation. You do not need to prepare every detail before starting; the skill asks one question at a time.
 
-在Codex中调用skill后，直接说明申请人的情况即可。无需一次填完所有信息，skill会每次只问一个关键问题。
+在任意已加载本skill的Agent中，要求它使用`study-abroad-country-fit`，再直接说明申请人的情况即可。无需一次填完所有信息，skill会每次只问一个关键问题。
 
 ### Example prompts / 示例提问
 
 ```text
-$study-abroad-country-fit
+Use study-abroad-country-fit to help me choose a study-abroad country.
 我本科毕业3年，计划2027年读硕士。总预算45万元人民币，英语可以准备，毕业后优先考虑进入消费品行业，能接受中等风险。请帮我选最适合的留学国家。
 ```
 
 ```text
-$study-abroad-country-fit
-I have a master's degree and want to apply for a PhD. I need a feasible funding route, care most about research fit, and may return to China after graduation. Which countries suit me best?
+使用study-abroad-country-fit，帮我判断最适合去哪个国家留学。
+I have a master's degree and want to apply for a PhD. I need a feasible funding route, care most about research fit, and may return to China after graduation.
 ```
 
 ## Boundaries / 使用边界

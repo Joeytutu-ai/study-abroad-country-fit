@@ -1,156 +1,96 @@
-# Study Abroad Country Fit / 留学国家匹配
+# Study Abroad Destination Shortlist
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[中文](#中文) | [English](#english)
 
-> Find the country that fits your study-abroad plan before comparing schools.
->
-> 先选适合自己的留学国家，再进入院校和专业选择。
+An agent skill for producing an evidence-backed Top3 study-abroad destination shortlist. It compares 12 countries and the Hong Kong Special Administrative Region of China as 13 study destinations, rather than treating one factor—such as tuition, ranking, or immigration policy—as decisive on its own.
 
-`study-abroad-country-fit` is an open-source agent skill for AI agents and skill runtimes that can load a local `SKILL.md` file. It interviews a degree-seeking applicant, removes destinations that conflict with their non-negotiables, and returns an explainable country-level Top3.
+## 中文
 
-`study-abroad-country-fit`是一个面向AI Agent与skill运行环境的开源skill。只要环境支持加载本地`SKILL.md`文件，就可以接入。它会通过逐题访谈建立申请人画像，先排除与硬条件冲突的目的地，再给出可解释的国家Top3。
+### 它解决什么问题
 
-## What it covers / 覆盖范围
+同样是“预算30万元、想读金融硕士”，加拿大、英国、新加坡或中国香港特别行政区并不会天然有固定答案。学历衔接、全学制总成本、授课语言、申请准备度、职业目标、家庭安排、风险偏好与目标行业会共同改变结论。
 
-The skill compares these 12 destinations:
+本skill先建立完整申请人画像，再以公开可核验的信息比较13个留学目的地，最终只交付目的地Top3及每个结果的证据、取舍与排名敏感项。
 
-- United Kingdom / 英国
-- Australia / 澳大利亚
-- Canada / 加拿大
-- United States / 美国
-- Singapore / 新加坡
-- Hong Kong SAR, China / 中国香港
-- Japan / 日本
-- South Korea / 韩国
-- Malaysia / 马来西亚
-- New Zealand / 新西兰
-- Switzerland / 瑞士
-- Germany / 德国
+### 覆盖范围
 
-It supports degree-oriented pathways:
+- 目的地：英国、澳大利亚、加拿大、美国、新加坡、日本、韩国、马来西亚、新西兰、瑞士、德国、法国，以及中国香港特别行政区。
+- 路径：高中升本科、本科升硕士、硕士升博士、成人再教育与职业转型。
+- 联网：以主管机构、官方国际教育门户、院校官网、公共资助机构与官方统计为首要证据；必要时补充方法公开、可追溯的权威国际组织、专业认证机构、学术数据库或公共数据集。
 
-- High school to bachelor's degree / 高中升本科
-- Bachelor's degree to master's degree / 本科升硕士
-- Master's degree to PhD / 硕士升博士
-- Adult degree study or career-transition study / 成人再教育或职业转型留学
+### 安装到任意兼容Agent
 
-## What you get / 你会得到什么
-
-The final response contains **country Top3 only**, each with a distinct role:
-
-| Role / 角色 | Meaning / 含义 |
-| --- | --- |
-| Safe choice / 稳妥选择 | Best balance of feasibility and risk under current conditions / 以当前条件看，可行性与风险最平衡 |
-| Ideal fit / 理想匹配 | Closest to the applicant's long-term goals, with any gaps stated / 最贴近长期目标，同时写明待补齐条件 |
-| Ambitious choice / 进取选择 | Higher upside with explicit cost, competition, timing, or policy risks / 上限更高，但成本、竞争、时间或政策风险更清晰 |
-
-For each selected country, the skill explains:
-
-- Why it fits / 适合原因
-- Main trade-off / 主要代价
-- Key risk / 关键风险
-- Conditions to meet / 需要达到的条件
-
-It also lists only the destinations that are currently blocked by a relevant hard condition, together with a reversible condition when one exists.
-
-## How it works / 如何匹配
-
-1. **Identify the pathway / 识别路径** — confirms that the request is degree-oriented and identifies the relevant study stage.
-2. **Build an applicant profile / 建立画像** — asks one focused question at a time and prioritizes budget, timeline, language, identity or family constraints, and non-negotiables.
-3. **Apply hard filters / 先做硬筛** — budget floor, minimum language arrangement, feasible time window, and direct constraint conflicts cannot be offset by soft preferences.
-4. **Score feasible options / 比较可行目的地** — scores core goal, budget pressure, career plan, academic fit, readiness, life adaptation, and risk tolerance.
-5. **Verify current facts / 核验时效信息** — checks official sources in the current session for material, changeable facts such as visas, work permissions, costs, scholarships, and post-study pathways.
-6. **Return an explainable Top3 / 输出可解释Top3** — never fills the list with unsuitable countries just to reach three results.
-
-## Install in your agent / 在你的Agent中安装
-
-### Option A: Download ZIP / 下载ZIP
-
-1. On GitHub, choose **Code → Download ZIP** and unzip the repository.
-2. Import the unzipped folder as a local skill in your agent, or copy the entire folder into that agent's local skills directory.
-3. Refresh the agent's skill list or start a new session if the skill is not shown immediately.
-
-Keep the folder structure intact. In the installed copy, `SKILL.md` must remain at the folder root and the `agents/`, `assets/`, and `references/` folders must stay alongside it.
-
-请保留完整目录结构。安装后的skill目录根部必须有`SKILL.md`，且`agents/`、`assets/`与`references/`目录不能丢失或单独移动。
-
-### Option B: Clone with Git / 使用Git克隆
+克隆或下载本仓库后，将整个`study-abroad-destination-shortlist`目录复制到目标Agent的skill目录。不要只复制`SKILL.md`，因为`references/`、`examples/`和`scripts/`是完整资产的一部分。
 
 ```bash
-git clone https://github.com/Joeytutu-ai/study-abroad-country-fit.git
+git clone https://github.com/<your-account>/study-abroad-destination-shortlist.git
+cp -R study-abroad-destination-shortlist <your-agent-skills-root>/
 ```
 
-Then import the cloned `study-abroad-country-fit` folder through your agent's local-skill workflow.
+例如，Codex通常使用`~/.codex/skills/`；其他Agent请使用其文档指定的skill目录。安装后按该Agent的刷新方式重新加载skills。
 
-> The repository root is the skill folder itself. After installation, `SKILL.md` should be located at `<your-agent-skill-directory>/study-abroad-country-fit/SKILL.md`.
->
-> 本仓库根目录就是skill目录。安装后应确认`SKILL.md`位于`<你的Agent的skill目录>/study-abroad-country-fit/SKILL.md`。
+### 使用方式
 
-### Example: Codex / 示例：Codex
+将下列请求交给已安装该skill的Agent：
 
-Codex users can install it with:
+```text
+请根据我的情况，使用study-abroad-destination-shortlist，为我匹配留学目的地Top3。
+```
+
+它会逐项补齐会改变排序的信息，并返回每个目的地的：匹配原因、关键得分维度、主要取舍、排名敏感项、来源链接和置信度。
+
+### 数据口径
+
+- 费用统一比较“整个学制的必要总成本区间”，而不是只比较单年学费。
+- 对政策、资格、项目、费用和时间要求，优先使用官方一手信息。
+- 对宏观比较可使用可追溯的权威补充数据，但不能覆盖冲突的一手官方结论。
+- 对个人签证、居留、资助、医疗或无障碍资格，只解释公开规则与待核验点，不替主管机构作个案决定。
+
+详见[来源政策](references/data-source-policy.md)和[匹配方法](references/matching-method.md)。
+
+### 本地校验
+
+无需安装第三方依赖：
 
 ```bash
-mkdir -p ~/.codex/skills
-cp -R study-abroad-country-fit ~/.codex/skills/study-abroad-country-fit
+npm run validate
 ```
 
-Other agents use different local-skill directories and import commands. Follow the documentation of the agent you use; the portable unit is the complete `study-abroad-country-fit` folder.
+## English
 
-不同Agent的本地skill目录和导入命令并不相同，请以所用Agent的文档为准；可移植的最小单位是完整的`study-abroad-country-fit`文件夹。
+### What it does
 
-## Use it / 使用方法
+This skill builds a complete applicant profile, verifies decision-changing facts, and returns only a Top3 study-abroad destination shortlist. It evaluates fit across degree progression, full-program cost, language, academic readiness, career plans, personal constraints, and risk tolerance.
 
-After your agent has loaded the skill, ask it to use `study-abroad-country-fit` and describe the applicant's situation. You do not need to prepare every detail before starting; the skill asks one question at a time.
+### Scope
 
-在任意已加载本skill的Agent中，要求它使用`study-abroad-country-fit`，再直接说明申请人的情况即可。无需一次填完所有信息，skill会每次只问一个关键问题。
+- Destinations: Australia, Canada, France, Germany, Japan, Malaysia, New Zealand, Singapore, South Korea, Switzerland, the United Kingdom, the United States, and the Hong Kong Special Administrative Region of China.
+- Pathways: undergraduate, taught/research master's, doctorate, adult education, and career transition.
+- Evidence: official sources first, with traceable authoritative supplementary data where it improves a comparison.
 
-### Example prompts / 示例提问
+### Install in any compatible agent
+
+Clone or download the repository, then copy the entire folder—not only `SKILL.md`—to the agent's skill directory.
+
+```bash
+git clone https://github.com/<your-account>/study-abroad-destination-shortlist.git
+cp -R study-abroad-destination-shortlist <your-agent-skills-root>/
+```
+
+For Codex, that directory is commonly `~/.codex/skills/`. For another agent, follow that agent's skill-installation documentation and reload its skills after copying.
+
+### Use
 
 ```text
-Use study-abroad-country-fit to help me choose a study-abroad country.
-我本科毕业3年，计划2027年读硕士。总预算45万元人民币，英语可以准备，毕业后优先考虑进入消费品行业，能接受中等风险。请帮我选最适合的留学国家。
+Use study-abroad-destination-shortlist to match the Top3 study-abroad destinations for my profile.
 ```
 
-```text
-使用study-abroad-country-fit，帮我判断最适合去哪个国家留学。
-I have a master's degree and want to apply for a PhD. I need a feasible funding route, care most about research fit, and may return to China after graduation.
-```
+The result includes rationale, pivotal scoring dimensions, trade-offs, ranking sensitivities, dated source links, and confidence for each shortlisted destination.
 
-## Boundaries / 使用边界
+## Repository checks
 
-This skill is for **country selection only**. It does not provide:
+`npm run validate` checks the required skill layout, metadata, core scope, reference files, examples, and the removal of legacy review-driven question caps. GitHub Actions runs the same check on every push and pull request.
 
-- School, program, major, or city recommendations / 院校、项目、专业或城市推荐
-- Language-school, short-course, study-tour, or working-holiday recommendations / 语言学校、短期研修、游学或工作假期推荐
-- Guarantees of admission, visa approval, scholarships, employment, or immigration outcomes / 对录取、签证、奖学金、就业或身份结果的保证
+## License
 
-Visa policy, work permissions, tuition and living costs, scholarships, and post-study pathways can change. The skill treats its country profiles as comparison guides, not current policy. It must check official sources during the relevant assessment and state the verification date; when a fact cannot be verified, it should say so rather than invent an answer.
-
-签证政策、兼职权限、费用、奖学金和毕业后路径都会变化。skill中的国家画像用于比较，不等同于现行政策。实际评估时必须重新核验官方来源并标注核验日期；无法核验的信息应明确说明，不能编造。
-
-## Repository structure / 仓库结构
-
-```text
-.
-├── SKILL.md                         # Workflow and guardrails / 工作流与边界
-├── agents/openai.yaml               # Skill metadata / skill元数据
-├── assets/result-template.md        # Output structure / 输出模板
-└── references/
-    ├── questionnaire.md             # Applicant questions / 画像问题
-    ├── scoring-rubric.md            # Hard filters and scoring / 硬筛与评分
-    ├── source-update-rules.md       # Evidence and freshness rules / 证据与时效规则
-    └── country-profiles/            # Comparison profiles for 12 destinations / 12国画像
-```
-
-## Contributing / 参与改进
-
-Issues and pull requests are welcome. When updating country profiles, keep policy claims traceable to official sources and preserve the distinction between verified facts and experience-based judgment.
-
-欢迎提交Issue或Pull Request。更新国家画像时，请让政策类信息可追溯到官方来源，并明确区分已核验事实与经验判断。
-
-## License / 许可证
-
-This project is released under the [MIT License](LICENSE).
-
-本项目采用[MIT许可证](LICENSE)开源。
+[MIT](LICENSE)

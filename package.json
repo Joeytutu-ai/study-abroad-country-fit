@@ -1,0 +1,14 @@
+{
+  "name": "study-abroad-destination-shortlist",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Validation tooling for the Study Abroad Destination Shortlist agent skill.",
+  "scripts": {
+    "validate": "node scripts/validate-skill.mjs",
+    "test": "node scripts/validate-skill.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

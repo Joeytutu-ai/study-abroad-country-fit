@@ -1,4 +1,4 @@
 interface:
-  display_name: "留学国家匹配"
-  short_description: "基于个人条件筛选12国留学目的地并输出国家Top3与行动建议"
-  default_prompt: "Use $study-abroad-country-fit to help me choose the three most suitable study-abroad countries."
+  display_name: "留学目的地初筛"
+  short_description: "根据学历路径、预算区间、语言准备与偏好，输出留学目的地Top3。"
+  default_prompt: "请用$study-abroad-destination-shortlist，根据我的学历目标、预算区间、语言和偏好，给出优先了解的留学目的地Top3。"
